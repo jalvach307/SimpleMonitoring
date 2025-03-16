@@ -1,0 +1,17 @@
+version: '3'
+services:
+  netdata:
+    container_name: netdata
+    image: netdata/netdata
+    hostname: netdata
+    pid: host
+    restart: unless-stopped
+    ports:
+      - "19999:19999"
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - /etc/os-release:/host/etc/os-release:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
